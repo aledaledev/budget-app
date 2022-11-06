@@ -37,7 +37,7 @@ class Expenses {
         return this.expenses.get(index);
     }
     getTotal() {
-        const total = this.expenses.getAll().reduce((acc, item) => (acc += this.convertCurrency(item, this.finalCurrency)), 0);
+        const total = this.getItems().reduce((acc, item) => (acc += this.convertCurrency(item, this.finalCurrency)), 0);
         return `${this.finalCurrency} $${total.toFixed(2).toString}`;
     }
     convertCurrency(item, currency) {

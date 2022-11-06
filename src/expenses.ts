@@ -65,7 +65,7 @@ class Expenses implements IExpenses {
     return this.expenses.get(index);
   }
   getTotal(): string {
-    const total = this.expenses.getAll().reduce(
+    const total = this.getItems().reduce(
         (acc, item) => (acc += this.convertCurrency(item, this.finalCurrency))
       ,0);
     return `${this.finalCurrency} $${total.toFixed(2).toString}`;
