@@ -12,10 +12,13 @@
 <body>
 
     <div class="container  w-75 ">
-        <div class="row py-4 pe-5 bg-primary bg-gradient display-1">
-            <span class="text-end text-white fw-normal">1893.2</span>
+        <div class="row py-4 px-5 bg-primary bg-gradient">
+            <button id="button-currency" class="col-1 my-auto btn btn-primary shadow-sm border-dark border-opacity-25 border-1">
+              <i class="bi bi-currency-exchange"></i>
+            </button>
+            <div class="col-11 text-end"><span id="display-currency" class="text-white display-6 fw-normal pe-2"></span><span id="display-total" class="text-white fw-normal display-2">####</span></div>
         </div>
-        <div class="row p-2 border">
+        <form class="row p-2 border">
             <div class="col-4 form-floating p-0 ">
                 <input id="input-title" type="text" class="rounded-0 form-control" id="floatingInput" placeholder="title">
                 <label for="floatingInput">Title</label>
@@ -26,13 +29,13 @@
             </div>
             <select id="input-select" class="w-25 rounded-0 form-select" aria-label="Default select example">
                 <option selected>USD</option>
-                <option value="1">ARS</option>
+                <option >ARS</option>
                 <!--<option value="2">SOL</option>
                 <option value="3">BRA</option>
                 <option value="3">COL</option>-->
             </select>
-            <button id="botton-add" type="button" class="col-2 rounded-0 btn btn-success">Add</button>
-        </div>
+            <button id="button-add" type="button" class="col-2 rounded-0 btn btn-success">Add</button>
+          </form>
         <div class="row p-2 border border-top-0">
             <table class="table">
                 <thead>
@@ -42,29 +45,15 @@
                     <th class="text-end" scope="col">Delete</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <th class="align-middle" scope="row">Mark</th>
-                    <td class="align-middle">4121</td>
-                    <td class="text-end"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                  </tr>
-                  <tr>
-                    <th class="align-middle" scope="row">Jacob</th>
-                    <td class="align-middle">123</td>
-                    <td class="text-end"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                  </tr>
-                  <tr>
-                    <th class="align-middle" scope="row">Larry the Bird</th>
-                    <td class="align-middle">1233</td>
-                    <td class="text-end"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                  </tr>
+                <tbody id="items">
+
                 </tbody>
               </table>
         </div>
     </div>
 
-    <script src="./js/expenses.js" type="modules"></script>
-    <script src="./js/index.js" type="modules"></script>
+    <script src="./js/expenses.js"></script>
+    <script src="./js/index.js"></script>
     <script src="./js/bootstrap.min.js"></script>
 </body>
 </html>
