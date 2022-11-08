@@ -4,6 +4,7 @@ const myconnection = require('express-myconnection')
 const mysql = require('mysql')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const routerLogin = require('./routes/login.routes')
 
 const app = express()
 app.set('port', 4000);
@@ -39,3 +40,5 @@ app.listen(app.get('port'),()=>{
 app.get('/', (req,res) => {
     res.render('home')
 })
+
+app.use('./', routerLogin)
