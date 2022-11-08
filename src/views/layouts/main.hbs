@@ -1,1 +1,44 @@
-{{body}}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <link href="./css/main.css" rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light bg-opacity-50">
+
+    <nav class="navbar navbar-dark navbar-expand-lg bg-primary shadow-lg py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-light fs-4" href="#">ExpenseTop</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="ms-auto navbar-nav">
+            <a class="px-4 nav-link mx-auto" href="/login">Log in</a>
+            <a class="nav-link mx-auto px-4 custom-border" href="/signup">Sign up</a>
+            <!--<a class="nav-link" href="#">User</a>
+            <a class="nav-link" href="#">Saved</a>
+            <a class="nav-link" href="#">Log out</a>-->
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    {{{body}}}
+
+    <script src="./js/bootstrap.min.js"></script>
+  </body>
+</html>

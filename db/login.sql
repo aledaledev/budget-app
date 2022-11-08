@@ -1,0 +1,10 @@
+CREATE DATABASE nodelogin
+DEFAULT CHARACTER SET = 'utf8mb4';
+
+USE nodelogin;
+
+CREATE TABLE IF NOT EXISTS users (
+    email VARCHAR(54) NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    password VARCHAR(155) NOT NULL
+);
