@@ -10,3 +10,12 @@ body{
 .custom-border:hover{
     border-color: rgba(255,255,255,1);
 }
+
+.custom-brand{ 
+    border-bottom: 1px solid #0d6efd;
+    transition: border .2s;
+}
+
+.custom-brand:hover{
+    border-width: 3px;
+}

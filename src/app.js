@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const routerLogin = require('./routes/login.routes')
 
 const app = express()
-app.set('port', 4000);
+app.set('port', 3000);
 
 app.set('views', __dirname + '/views');
 app.engine('.hbs', engine({extname:'.hbs'}))
@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/../public'));
 
 app.use(myconnection(mysql, {
-    hots:'localhost',
+    host:'localhost',
     user:'root',
     password:'QQuuaa123789@',
     port:3306,
@@ -37,8 +37,9 @@ app.listen(app.get('port'),()=>{
     console.log(`Listening on port ${app.get('port')}`);
 })
 
+//son urls
 app.get('/', (req,res) => {
     res.render('home')
 })
 
-app.use('./', routerLogin)
+app.use('/', routerLogin)

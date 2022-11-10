@@ -1,1 +1,58 @@
-<h1 class="h1 fw-medium text-dark text-opacity-75">Sign up</h1>
+<div class="container">
+  <div class="row h-75 w-100 mx-auto">
+    <div
+      class="col-12 col-lg-5 d-inline-flex flex-column border-primary align-items-center mx-auto mt-5 rounded-4 border border-1 px-5 pt-4 my-auto shadow"
+    >
+      <h1 class="h1 fw-medium text-dark text-center text-opacity-75 mb-4">Sign up</h1>
+      <form class="w-100 mx-auto" method="POST">
+        <div class="mb-3">
+          <label for="name-input" class="form-label">Name</label>
+          <input
+            name="name"
+            type="text"
+            class="form-control"
+            id="name-input"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email-input" class="form-label">Email address</label>
+          {{#if error}}
+            <p class=" text-danger fw-bold text-opacity-75">{{error}}</p>
+          {{/if}}
+          <input
+            name="email"
+            type="email"
+            class="form-control"
+            id="email-input"
+            aria-describedby="emailHelp"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password-input" class="form-label">Password</label>
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            id="password-input"
+            required
+          />
+        </div> 
+        <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <select id="country" class="form-select" name="country">
+          <option value="Argentina">Argentina</option>
+          <option value="Uruguay">Uruguay</option>
+          <option value="Bolivia">Bolivia</option>
+          <option value="Paraguay">Paraguay</option>
+          <option value="Chile">Chile</option>
+        </select>
+        </div>
+        <div class="w-100 text-center">
+          <button type="submit" class="btn btn-primary">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
