@@ -13,7 +13,18 @@ const authUser = (req, res) => {
   req.getConnection((err, con) => {
     con.query("SELECT * FROM users WHERE email = ?",[data.email],(err, userdata) => {
         if (userdata.length > 0) {
-          console.log('user exists');
+          userdata.map((elem) => {
+            bcrypt.compare(data.password, elem.password, (err, isMatch) => {
+              if (!isMatch) {
+                res.render("login/login", { error: "Incorrect password!" });
+              } else {
+                console.log("welcome");
+                req.session.loggedin = true;
+                req.session.name = element.name;
+                res.redirect('/')
+              }
+            });
+          });
         } else {
           res.render("login/login", { error: "User not exists!" });
         }
