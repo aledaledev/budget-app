@@ -2,16 +2,28 @@ const bcrypt = require("bcrypt");
 
 //maneja que sucedera y de donde traera los recursos
 const login = (req, res) => {
-  res.render("login/login");
+  if (req.session.loggedin != true) {
+    res.render("login/login");
+  } else {
+    res.redirect("/");
+  }
 };
+
 const signup = (req, res) => {
-  res.render("login/signup");
+  if (req.session.loggedin != true) {
+    res.render("login/signup");
+  } else {
+    res.redirect("/");
+  }
 };
 
 const authUser = (req, res) => {
   const data = req.body;
   req.getConnection((err, con) => {
-    con.query("SELECT * FROM users WHERE email = ?",[data.email],(err, userdata) => {
+    con.query(
+      "SELECT * FROM users WHERE email = ?",
+      [data.email],
+      (err, userdata) => {
         if (userdata.length > 0) {
           userdata.map((elem) => {
             bcrypt.compare(data.password, elem.password, (err, isMatch) => {
@@ -20,8 +32,8 @@ const authUser = (req, res) => {
               } else {
                 console.log("welcome");
                 req.session.loggedin = true;
-                req.session.name = element.name;
-                res.redirect('/')
+                req.session.name = elem.name;
+                res.redirect("/");
               }
             });
           });

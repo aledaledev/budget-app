@@ -37,9 +37,12 @@ app.listen(app.get('port'),()=>{
     console.log(`Listening on port ${app.get('port')}`);
 })
 
-//son urls
-app.get('/', (req,res) => {
-    res.render('home')
-})
-
 app.use('/', routerLogin)
+
+app.get('/', (req,res) => {
+    if(req.session.loggedin == true){
+        res.render("home", {name: req.session.name});
+    } else {
+        res.redirect('/login')
+      }
+})
