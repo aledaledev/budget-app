@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const routerLogin = require("./routes/login.routes");
 
 const flash = require("connect-flash");
-const cookieParser = require("cookie-parser");
 
 const app = express();
 app.set("port", 3000);
@@ -51,12 +50,13 @@ app.listen(app.get("port"), () => {
     res.render('home')
 })*/
 
-app.use(cookieParser("secret"));
 app.use(flash());
 
+//guarda en variable local
+//con next() no interrumpe la siguiente accion
 app.use(function (req, res, next) {
-  res.locals.mensajeRegistro = req.flash("mensajeRegistro");
-  next();
+  res.locals.message = req.flash("message");
+  next()
 });
 
 app.use("/", routerLogin);
@@ -64,7 +64,6 @@ app.use("/", routerLogin);
 app.get("/", (req, res) => {
   if (req.session.loggedin == true) {
     res.render("home", { name: req.session.name });
-    req.flash('mensajeRegistro','Gracias por crear tu cuenta, ahora estas autentificado.');
   } else {
     res.render("home", { visible: true });
   }

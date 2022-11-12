@@ -30,45 +30,45 @@ const authUser = (req, res) => {
               if (!isMatch) {
                 res.render("session/login", { error: "Incorrect password!" });
               } else {
-                req.session.loggedin = true;
-                req.session.name = elem.name;
-                res.redirect("/signup");
-              }
+                  req.session.loggedin = true;
+                  req.session.name = elem.name;
+                  res.redirect("/");
+                  req.flash('message','Sign up correctly, now Log In for continue!');
+                }
             });
-          });
-        } else {
+    });
+} else {
           res.render("session/login", { error: "User not exists!" });
         }
-      }
+    }
     );
-  });
+});
 };
 
 const storeUser = (req, res) => {
-  const data = req.body;
-  req.getConnection((err, con) => {
-    con.query(
-      "SELECT * FROM users WHERE email = ?",
-      [data.email],
-      (err, userdata) => {
-        if (userdata.length > 0) {
+    const data = req.body;
+    req.getConnection((err, con) => {
+        con.query(
+            "SELECT * FROM users WHERE email = ?",
+            [data.email],
+            (err, userdata) => {
+                if (userdata.length > 0) {
           res.render("session/signup", { error: "Email already in use!" });
         } else {
           bcrypt.hash(data.password, 12).then((hash) => {
-            data.password = hash;
-            const { email, name, password } = data;
+              data.password = hash;
+              const { email, name, password } = data;
             req.getConnection((err, con) => {
               con.query(
                 "INSERT INTO users (email,name,password) VALUES (?,?,?) ",
                 [email, name, password],
                 (err, rows) => {
-                  res.redirect("/login");
+                    res.redirect("/login");
                 }
-              );
+                );
             });
-          });
-          
-        }
+        });
+    }
       }
     );
   });
