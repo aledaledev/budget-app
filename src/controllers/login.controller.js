@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 //maneja que sucedera y de donde traera los recursos
 const login = (req, res) => {
   if (req.session.loggedin != true) {
-    res.render("login/login");
+    res.render("session/login");
   } else {
     res.redirect("/");
   }
@@ -11,7 +11,7 @@ const login = (req, res) => {
 
 const signup = (req, res) => {
   if (req.session.loggedin != true) {
-    res.render("login/signup");
+    res.render("session/signup");
   } else {
     res.redirect("/");
   }
@@ -28,17 +28,16 @@ const authUser = (req, res) => {
           userdata.map((elem) => {
             bcrypt.compare(data.password, elem.password, (err, isMatch) => {
               if (!isMatch) {
-                res.render("login/login", { error: "Incorrect password!" });
+                res.render("session/login", { error: "Incorrect password!" });
               } else {
-                console.log("welcome");
                 req.session.loggedin = true;
                 req.session.name = elem.name;
-                res.redirect("/");
+                res.redirect("/signup");
               }
             });
           });
         } else {
-          res.render("login/login", { error: "User not exists!" });
+          res.render("session/login", { error: "User not exists!" });
         }
       }
     );
@@ -53,7 +52,7 @@ const storeUser = (req, res) => {
       [data.email],
       (err, userdata) => {
         if (userdata.length > 0) {
-          res.render("login/signup", { error: "Email already in use!" });
+          res.render("session/signup", { error: "Email already in use!" });
         } else {
           bcrypt.hash(data.password, 12).then((hash) => {
             data.password = hash;
@@ -63,11 +62,12 @@ const storeUser = (req, res) => {
                 "INSERT INTO users (email,name,password) VALUES (?,?,?) ",
                 [email, name, password],
                 (err, rows) => {
-                  res.redirect("/");
+                  res.redirect("/login");
                 }
               );
             });
           });
+          
         }
       }
     );
