@@ -1,6 +1,14 @@
-{{#if visible}}
+<h1 class="fw-normal text-dark text-opacity-75 mb-4 text-center">Your Dashboard</h1>
 
-<div class="container">
+<button class="add-table">+</button>
+
+{{#if content}}
+
+
+{{else}}
+
+<p>Oops there is nothing here yet! Start creating one table</p>
+   <div class="container">
   <div class=" row h-75 w-100 mx-auto">
     <div class="col-12 col-lg-7 d-inline-flex flex-column border-primary align-items-center m-auto rounded-4 border border-1 p-5 shadow">
       <h1 class="fw-normal text-dark text-opacity-75 mb-4 text-center">Welcome to <span class="custom-brand text-primary fw-bold pb-1 ">ExpenceTop</span></h1>
@@ -13,5 +21,3 @@
 </div>
 
 {{/if}}
-
-

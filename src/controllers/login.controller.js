@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const { response } = require("express");
 
 //maneja que sucedera y de donde traera los recursos
 const login = (req, res) => {
@@ -30,53 +31,61 @@ const authUser = (req, res) => {
               if (!isMatch) {
                 res.render("session/login", { error: "Incorrect password!" });
               } else {
-                  req.session.loggedin = true;
-                  req.session.name = elem.name;
-                  res.redirect("/");
-                  req.flash('message','Sign up correctly, now Log In for continue!');
-                }
+                req.session.loggedin = true;
+                req.session.name = elem.name;
+                req.flash("message", "Logged correctly!");
+                res.redirect("/");
+              }
             });
-    });
-} else {
+          });
+        } else {
           res.render("session/login", { error: "User not exists!" });
         }
-    }
+      }
     );
-});
+  });
 };
 
 const storeUser = (req, res) => {
-    const data = req.body;
-    req.getConnection((err, con) => {
-        con.query(
-            "SELECT * FROM users WHERE email = ?",
-            [data.email],
-            (err, userdata) => {
-                if (userdata.length > 0) {
+  const data = req.body;
+  req.getConnection((err, con) => {
+    con.query(
+      "SELECT * FROM users WHERE email = ?",
+      [data.email],
+      (err, userdata) => {
+        if (userdata.length > 0) {
           res.render("session/signup", { error: "Email already in use!" });
         } else {
           bcrypt.hash(data.password, 12).then((hash) => {
-              data.password = hash;
-              const { email, name, password } = data;
+            data.password = hash;
+            const { email, name, password } = data;
             req.getConnection((err, con) => {
               con.query(
                 "INSERT INTO users (email,name,password) VALUES (?,?,?) ",
                 [email, name, password],
                 (err, rows) => {
-                    res.redirect("/login");
+                  res.redirect("/login");
                 }
-                );
+              );
             });
-        });
-    }
+          });
+        }
       }
     );
   });
 };
+
+const logout = (req,res) => {
+    if(req.session.loggedin === true){
+        req.session.destroy();
+    }
+    res.redirect('/')
+}
 
 module.exports = {
   login,
   signup,
   storeUser,
   authUser,
+  logout
 };

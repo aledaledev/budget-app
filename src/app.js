@@ -63,7 +63,7 @@ app.use("/", routerLogin);
 
 app.get("/", (req, res) => {
   if (req.session.loggedin == true) {
-    res.render("home", { name: req.session.name });
+    res.render("layouts/dashboard", { name: req.session.name });
   } else {
     res.render("home", { visible: true });
   }

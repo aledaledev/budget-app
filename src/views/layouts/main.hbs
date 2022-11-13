@@ -25,15 +25,25 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        {{#if name}}
+        
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="ms-auto navbar-nav">
+            <a class="nav-link" href="/user_options">{{name}}</a>
+            <a class="nav-link" href="/logout">Log out</a>
+          </div>
+        </div>
+        
+        {{else}}
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="ms-auto navbar-nav">
             <a class="px-4 nav-link mx-auto" href="/login">Log in</a>
             <a class="nav-link mx-auto px-4 custom-border" href="/signup">Sign up</a>
-            <!--<a class="nav-link" href="#">User</a>
-            <a class="nav-link" href="#">Saved</a>
-            <a class="nav-link" href="#">Log out</a>-->
           </div>
         </div>
+        {{/if}}
       </div>
     </nav>
 
